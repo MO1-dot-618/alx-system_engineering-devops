@@ -2,4 +2,8 @@
 # configures an Nginx server so that /redirect_me
 # is redirecting to https://chat.openai.com/
 
+apt-get update
+apt-get install -y nginx
+echo "Hello World!" > /var/www/html/index.html
 sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://chat.openai.com/ permanent;' /etc/nginx/sites-available/default
+service nginx reload
