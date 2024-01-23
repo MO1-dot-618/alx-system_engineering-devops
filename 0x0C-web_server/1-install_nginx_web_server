@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Installs Nginx that listens on port 80
+# Create an index pageshowing hoello world
+
+apt-get update
+apt-get install -y nginx
+echo "Hello World!" > /var/www/html/index.html
