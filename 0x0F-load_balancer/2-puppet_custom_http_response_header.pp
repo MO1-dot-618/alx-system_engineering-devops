@@ -1,21 +1,29 @@
-#Installing nginx and redirection configuration
+# Custom HTTP header in a nginx server
 
-package { 'nginx':
-  ensure => installed,
+# update ubuntu server
+exec { 'update server':
+  command  => 'apt-get update',
+  user     => 'root',
+  provider => 'shell',
 }
-
-file_line { 'install':
+->
+# install nginx web server on server
+package { 'nginx':
+  ensure   => present,
+  provider => 'apt'
+}
+->
+# custom Nginx response header (X-Served-By: hostname)
+file_line { 'add HTTP header':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
-  line   => 'add_header X-Served-By $hostname;',
+  line   => 'add_header X-Served-By $hostname;'
 }
-
-file { '/var/www/html/index.html':
-  content => 'Hello World!',
-}
-
+->
+# start service
 service { 'nginx':
-  ensure  => running,
-  require => Package['nginx'],
+  ensure  => 'running',
+  enable  => true,
+  require => Package['nginx']
 }
