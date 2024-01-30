@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # configures loadbalancer
 
-apt-get update
-apt-get install -y haproxy
+sudo apt-get update
+sudo apt-get install -y haproxy
 
 server_config=\
 "
