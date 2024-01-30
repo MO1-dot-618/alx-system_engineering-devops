@@ -1,18 +1,28 @@
 #!/usr/bin/env bash
-# configures loadbalancer
+#Configure load balancer 
 
-sudo apt-get update
-sudo apt-get install -y haproxy
+sudo apt-get -y update
+sudo apt-get -y install haproxy
 
+# edit config file
 server_config=\
 "
-        bind *:80
+frontend redars_front
+        bind 0:80
         mode http
+        default_backend redars_front
+backend redars_back
         balance roundrobin
-        server 176572-web-01 54.165.168.252:80 check
-        server 176572-web-02 34.237.91.136:80 check
+        server 484906-web-01 100.25.149.136:80 check
+        server 484906-web-02 100.26.209.254:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
+# enable haproxy to be started by init script
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# Testing the HAproxy configuration file
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Restart the Nginx service
 sudo service haproxy restart
