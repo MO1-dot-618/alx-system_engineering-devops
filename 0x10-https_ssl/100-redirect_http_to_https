@@ -41,8 +41,8 @@ frontend redars_front
 
 frontend www-https
 	bind *:80
-	bind *:443 ssl crt /etc/letsencrypt/live/www.sw-eng-malika.tech.pem
-	reqadd X-Forwarded-Proto:\ https
+	bind *:443 ssl crt /etc/haproxy/ssl/www.sw-eng-malika.tech.pem
+	http-request set-header X-Forwarded-Proto https
 	default_backend redars_back
 	redirect scheme https code 301 if !{ ssl_fc }
 
