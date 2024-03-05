@@ -4,12 +4,13 @@ get number of subscribers in a subreddit.
 """
 import requests
 
+
 def number_of_subscribers(subreddit):
     # Reddit API URL for subreddit information
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
 
     # Set a custom User-Agent to avoid Too Many Requests errors
-    headers = {"User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/agria_myalo)"}
+    headers = {"User-Agent": "linux:0x16.api.advanced by Malika)"}
 
     try:
         # Make the GET request to the Reddit API
