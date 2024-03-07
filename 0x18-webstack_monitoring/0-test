@@ -1,4 +1,0 @@
-curl -X GET "https://api.datadoghq.com/api/v1/hosts/totals" \
--H "Content-Type: application/json" \
--H "DD-API-KEY: 18bf2d4cfd1998cd1abf130ec4bb2f77" \
--H "DD-APPLICATION-KEY: c0060d882c4d03acb9a41bc2105d6c20ee54bd7c"
